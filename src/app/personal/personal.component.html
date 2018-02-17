@@ -1,0 +1,36 @@
+<form #personalForm="ngForm" class="editForm" novalidate>
+    <div class="tab-pane fade in active">
+        <h4 class="head text-center">{{title}}</h4>
+        <p class=" text-center">{{heading}}</p>
+        <br/>
+        <div class='row'>
+            <div class='col-xs-offset-1 col-xs-10 col-sm-offset-2 col-sm-8'>
+              
+                <div class="form-group">
+                    <!-- <label class="control-label" for="email">Email</label> -->
+                    <input class="form-control input-md" #email="ngModel" required pattern="^[^\s@]+@[^\s@]+\.[^\s@]{2,}$" id="email" name="email" type="text" placeholder="Email" [(ngModel)]="personal.email">
+                    <div class="alert alert-danger" [hidden]="email.valid" *ngIf="email.touched">Email is required and must be valid</div>
+                </div>
+                <div class="row">
+                    <div class='col-xs-12 col-sm-6'>
+                        <div class="form-group">
+                            <!-- <label class="control-label" for="password">Password</label>   -->
+                            <input class="form-control input-md" #password="ngModel" required validateEqual="confirmPassword" reverse="true" id="password" name="password" type="text" placeholder="Password" [(ngModel)]="personal.password" type="password">   
+                            <div class="alert alert-danger" [hidden]="password.valid" *ngIf="password.touched">Password is required</div>
+                        </div>
+                    </div>
+                    <div class='col-xs-12 col-sm-6'>
+                        <div class="form-group">
+                            <!-- <label class="control-label" for="confirmPassword">Confirm Password</label>   -->
+                            <input class="form-control input-md" #confirmPassword="ngModel" required validateEqual="password" id="confirmPassword" name="confirmPassword" type="text" placeholder="Confirm Password" [(ngModel)]="personal.confirmPassword" type="password">
+                            <div class="alert alert-danger" [hidden]="confirmPassword.valid" *ngIf="confirmPassword.touched">Password Mismatch</div>
+                        </div>
+                    </div>
+                </div>    
+                <div class="form-group text-center">
+                    <button class="btn btn-success btn-outline-rounded btn-info" [disabled]="!personalForm.valid" (click)="goToNext(personalForm)"> Next <span style="margin-left:10px;" class="glyphicon glyphicon-arrow-right"></span></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
